@@ -9,16 +9,18 @@
 把下面这句话发给 DSH 里的 Agent：
 
 ```text
-请调用 plugin_manager 工具（action: install_bundle），安装插件：git+https://github.com/myxiaolizi/dsh-BrainyAIClaw.git
-```
-
-或者用打包好的压缩包（国内网络更快）：
-
-```text
 请调用 plugin_manager 工具（action: install_bundle），安装插件：https://wenjian.zhengl.vip/DSH/dsh-brainyaiclaw-1.0.0.tgz
 ```
 
-安装后 DSH 会自动加载插件；没生效时重启一次 DSH。
+这是打包好的安装包，不需要本机有 Git，国内下载也快。
+
+装完 DSH 会自动加载插件，不需要重启；如果设置页里没看到“BAC 模型”，重启一次 DSH。
+
+> 也可以从源码安装（需要本机已安装 Git，DSH 安装时会先用 `git ls-remote` 检查仓库）：
+>
+> ```text
+> 请调用 plugin_manager 工具（action: install_bundle），安装插件：git+https://github.com/myxiaolizi/dsh-BrainyAIClaw.git
+> ```
 
 ## 它做的事
 
