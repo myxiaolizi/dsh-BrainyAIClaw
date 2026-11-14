@@ -1,0 +1,39 @@
+{
+  "name": "dsh-brainyaiclaw",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Hands BrainyAIClaw's model list to DeepSeek Harness as a read-only provider named BAC, with editable display names, per-model enable switches and input modalities.",
+  "type": "module",
+  "exports": {
+    ".": "./index.js",
+    "./client": "./client.js",
+    "./locale/*.json": "./locale/*.json",
+    "./icon": "./icon.svg"
+  },
+  "files": [
+    "index.js",
+    "client.js",
+    "cordis.patch.yml",
+    "locale/*.json",
+    "icon.svg",
+    "README.md"
+  ],
+  "keywords": [
+    "dsh-plugin",
+    "brainyaiclaw",
+    "model-provider"
+  ],
+  "license": "MIT",
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
+    "client": {
+      "platform": "web",
+      "immediately": true,
+      "inject": [
+        "@deepseek-ai/dsh-client-ui-settings"
+      ]
+    }
+  }
+}
