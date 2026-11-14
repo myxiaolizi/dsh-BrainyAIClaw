@@ -1,0 +1,21 @@
+# dsh-brainyaiclaw: the BAC model provider for this DSH profile.
+#
+# The row below registers the `brainyaiclaw` LLM route, whose display name is
+# BAC. It speaks BrainyAIClaw's OpenAI-compatible gateway, reads BrainyAIClaw's
+# own login token and model catalog from the locally installed app, and keeps
+# the endpoint and the key read-only: only display names, per-model enable
+# switches and input modalities are editable, from the plugin's own settings
+# page.
+#
+# BrainyAIClaw writes only its own `lobsterai-`-prefixed routes into
+# `llm-pi-ai` and rewrites `agent-default-model` / `llm-pi-ai`, so neither that
+# row nor this one is overwritten when the app starts.
+- insert:
+    - id: dsh-brainyaiclaw
+      name: 'dsh-brainyaiclaw'
+
+# Hide the built-in DeepSeek provider so the model menu shows one model group
+# (BAC) instead of two. Delete this entry to keep both providers.
+- id: llm-deepseek
+  name: '@deepseek-ai/dsh-llm-deepseek-api-key'
+  disabled: true
