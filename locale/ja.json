@@ -1,4 +1,4 @@
-﻿{
+{
   "meta": {
     "title": "BAC models",
     "description": "Serves BrainyAIClaw's models to DeepSeek Harness as the BAC provider, with editable display names, per-model switches and input types."

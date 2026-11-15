@@ -324,6 +324,13 @@ export function apply(ctx, config = {}) {
     timeoutMs: Number.isFinite(config.timeoutMs) && config.timeoutMs > 0 ? config.timeoutMs : 900000,
     syncIntervalMs: Number.isFinite(config.syncIntervalMs) && config.syncIntervalMs > 0 ? config.syncIntervalMs : 60000,
     useAppCatalog: config.useAppCatalog !== false,
+    // The LLM adapter registry is all-or-nothing per route, so exactly one
+    // owner may claim `brainyaiclaw`. Claiming it here is the default and keeps
+    // this plugin self-contained. Setting `registerRoute: false` hands the
+    // route to `llm-pi-ai`, which is what puts the provider row and its
+    // per-model reasoning switches on the built-in Settings -> Models page.
+    // The two owners may never run together.
+    registerRoute: config.registerRoute !== false,
   }
 
   /** Last successfully read app catalog, so a transient read failure never empties the menu. */
@@ -854,7 +861,15 @@ export function apply(ctx, config = {}) {
     },
   }
 
-  ctx.llm.registerAdapter([PROVIDER], adapter)
+  // Exactly one adapter may own a route, and `registerAdapter` refuses the
+  // whole call when a provider is already claimed. `llm-pi-ai` is the owner
+  // whenever it serves this route, so claiming it here too would take both
+  // registrations down.
+  if (options.registerRoute) {
+    ctx.llm.registerAdapter([PROVIDER], adapter)
+  } else {
+    note('route registration is left to llm-pi-ai; set registerRoute: true to claim it here')
+  }
 
   // --- settings page HTTP surface -------------------------------------------
 
